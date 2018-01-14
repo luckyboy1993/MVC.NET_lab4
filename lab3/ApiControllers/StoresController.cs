@@ -27,8 +27,7 @@ namespace lab3.ApiControllers
             if (!string.IsNullOrEmpty(query))
                 return _context.Store.Include(s => s.SalesPerson).Where(p => p.Name.Contains(query));
 
-            var x = _context.Store;
-            return x;
+            return _context.Store;
         }
 
         // GET: api/Stores/5
