@@ -1,0 +1,54 @@
+﻿@model DALlab3.Entities.Store
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Store</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Demographics)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Demographics)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Rowguid)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Rowguid)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessEntity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BusinessEntity.BusinessEntityId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesPerson)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SalesPerson.BusinessEntityId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.BusinessEntityId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
