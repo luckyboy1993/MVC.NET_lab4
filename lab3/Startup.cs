@@ -25,7 +25,7 @@ namespace lab3
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<AdventureWorks2014Context>(options =>options.UseSqlServer(@"Data Source=DESKTOP-KDKTVJH\LUCIANSQL;Initial Catalog=AdventureWorks2014;Persist Security Info=True;User ID=sa;Password=335113"));
+            services.AddDbContext<AdventureWorks2014Context>(options => options.UseSqlServer(Configuration.GetConnectionString("lab3database")));
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });

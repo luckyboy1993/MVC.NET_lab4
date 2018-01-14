@@ -80,15 +80,6 @@ namespace DALlab3.Entities
         // Unable to generate entity type for table 'Production.ProductDocument'. Please see the warning messages.
         // Unable to generate entity type for table 'Production.Document'. Please see the warning messages.
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                base.OnConfiguring(optionsBuilder);
-                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-KDKTVJH\LUCIANSQL;Initial Catalog=AdventureWorks2014;Persist Security Info=True;User ID=sa;Password=335113");
-            }
-        }
-
         public AdventureWorks2014Context(DbContextOptions<AdventureWorks2014Context> options)
         : base(options)
         { }

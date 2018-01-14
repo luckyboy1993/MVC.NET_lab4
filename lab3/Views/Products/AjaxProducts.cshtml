@@ -1,10 +1,11 @@
-﻿@{
-    ViewData["Title"] = "AjaxStores";
+﻿
+@{
+    ViewData["Title"] = "AjaxProducts";
 }
 
-<h2>AjaxStores</h2>
+<h2>AjaxProducts</h2>
 
-<button type="button" onclick="load()">Get Stores</button>
+<button type="button" onclick="load()">Get Products</button>
 
 <input type="text" id="query" placeholder="query" />
 
@@ -12,9 +13,8 @@
 
 <table id="table">
     <tr>
-        <th>Name</th>
         <th>Id</th>
-        <th>Sales</th>
+        <th>Name</th>
     </tr>
 </table>
 
@@ -34,21 +34,20 @@
             }
         };
 
-        xhttp.open("GET", "/api/Stores" + query, true);
+        xhttp.open("GET", "/api/Products" + query, true);
         xhttp.send();
     }
 
     function toTable(data) {
         $('#table').empty();
-        $('#table').append('<tr><th>Name</th><th>Id</th><th>Sales</th></tr>');
+        $('#table').append('<tr><th>Id</th><th>Name</th></tr>');
         var i;
         var response = $.parseJSON(data);
         $(function () {
             $.each(response, function (i, item) {
                 var $tr = $('<tr>').append(
-                    $('<td>').text(item.name),
-                    $('<td>').text(item.businessEntityId)
-                    $('<td>').text(item.salesPerson.salesLastYear)
+                    $('<td>').text(item.productId),
+                    $('<td>').text(item.name)
                 ).appendTo('#table');
             });
         });

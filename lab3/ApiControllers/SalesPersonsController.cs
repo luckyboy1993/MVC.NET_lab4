@@ -10,61 +10,57 @@ using DALlab3.Entities;
 namespace lab3.ApiControllers
 {
     [Produces("application/json")]
-    [Route("api/Stores")]
-    public class StoresController : Controller
+    [Route("api/SalesPersons")]
+    public class SalesPersonsController : Controller
     {
         private readonly AdventureWorks2014Context _context;
 
-        public StoresController(AdventureWorks2014Context context)
+        public SalesPersonsController(AdventureWorks2014Context context)
         {
             _context = context;
-        } 
-
-        // GET: api/Stores
-        [HttpGet]
-        public IEnumerable<Store> GetStores([FromQuery] string query)
-        {
-            if (!string.IsNullOrEmpty(query))
-                return _context.Store.Include(s => s.SalesPerson).Where(p => p.Name.Contains(query));
-
-            var x = _context.Store;
-            return x;
         }
 
-        // GET: api/Stores/5
+        // GET: api/SalesPersons
+        [HttpGet]
+        public IEnumerable<SalesPerson> GetSalesPerson()
+        {
+            return _context.SalesPerson;
+        }
+
+        // GET: api/SalesPersons/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetStore([FromRoute] int id)
+        public async Task<IActionResult> GetSalesPerson([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var store = await _context.Store.Include(s => s.SalesPerson).FirstOrDefaultAsync(m => m.BusinessEntityId == id);
+            var salesPerson = await _context.SalesPerson.SingleOrDefaultAsync(m => m.BusinessEntityId == id);
 
-            if (store == null)
+            if (salesPerson == null)
             {
                 return NotFound();
             }
 
-            return Ok(store);
+            return Ok(salesPerson);
         }
 
-        // PUT: api/Stores/5
+        // PUT: api/SalesPersons/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStore([FromRoute] int id, [FromBody] Store store)
+        public async Task<IActionResult> PutSalesPerson([FromRoute] int id, [FromBody] SalesPerson salesPerson)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != store.BusinessEntityId)
+            if (id != salesPerson.BusinessEntityId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(store).State = EntityState.Modified;
+            _context.Entry(salesPerson).State = EntityState.Modified;
 
             try
             {
@@ -72,7 +68,7 @@ namespace lab3.ApiControllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!StoreExists(id))
+                if (!SalesPersonExists(id))
                 {
                     return NotFound();
                 }
@@ -85,23 +81,23 @@ namespace lab3.ApiControllers
             return NoContent();
         }
 
-        // POST: api/Stores
+        // POST: api/SalesPersons
         [HttpPost]
-        public async Task<IActionResult> PostStore([FromBody] Store store)
+        public async Task<IActionResult> PostSalesPerson([FromBody] SalesPerson salesPerson)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Store.Add(store);
+            _context.SalesPerson.Add(salesPerson);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (StoreExists(store.BusinessEntityId))
+                if (SalesPersonExists(salesPerson.BusinessEntityId))
                 {
                     return new StatusCodeResult(StatusCodes.Status409Conflict);
                 }
@@ -111,33 +107,33 @@ namespace lab3.ApiControllers
                 }
             }
 
-            return CreatedAtAction("GetStore", new { id = store.BusinessEntityId }, store);
+            return CreatedAtAction("GetSalesPerson", new { id = salesPerson.BusinessEntityId }, salesPerson);
         }
 
-        // DELETE: api/Stores/5
+        // DELETE: api/SalesPersons/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteStore([FromRoute] int id)
+        public async Task<IActionResult> DeleteSalesPerson([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var store = await _context.Store.SingleOrDefaultAsync(m => m.BusinessEntityId == id);
-            if (store == null)
+            var salesPerson = await _context.SalesPerson.SingleOrDefaultAsync(m => m.BusinessEntityId == id);
+            if (salesPerson == null)
             {
                 return NotFound();
             }
 
-            _context.Store.Remove(store);
+            _context.SalesPerson.Remove(salesPerson);
             await _context.SaveChangesAsync();
 
-            return Ok(store);
+            return Ok(salesPerson);
         }
 
-        private bool StoreExists(int id)
+        private bool SalesPersonExists(int id)
         {
-            return _context.Store.Any(e => e.BusinessEntityId == id);
+            return _context.SalesPerson.Any(e => e.BusinessEntityId == id);
         }
     }
 }

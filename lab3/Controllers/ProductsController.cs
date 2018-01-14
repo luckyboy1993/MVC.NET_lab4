@@ -18,6 +18,11 @@ namespace lab3.Controllers
             _context = context;
         }
 
+        public IActionResult AjaxProducts()
+        {
+            return View();
+        }
+
         // GET: Products
         public async Task<IActionResult> Index()
         {

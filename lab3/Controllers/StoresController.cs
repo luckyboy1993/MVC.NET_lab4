@@ -18,16 +18,16 @@ namespace lab3.Controllers
             _context = context;
         }
 
+        public IActionResult AjaxStores()
+        {
+            return View();
+        }
+
         // GET: Stores
         public async Task<IActionResult> Index()
         {
             var adventureWorks2014Context = _context.Store.Include(s => s.BusinessEntity).Include(s => s.SalesPerson);
             return View(await adventureWorks2014Context.ToListAsync());
-        }
-
-        public IActionResult AjaxStores()
-        {
-            return View();
         }
 
         // GET: Stores/Details/5
