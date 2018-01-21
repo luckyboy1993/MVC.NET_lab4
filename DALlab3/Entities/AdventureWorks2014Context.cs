@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace DALlab3.Entities
 {
-    public partial class AdventureWorks2014Context : DbContext
+    public partial class _Context : DbContext
     {
         public virtual ISet<Address> Address { get; set; }
         public virtual DbSet<AddressType> AddressType { get; set; }
@@ -80,10 +80,16 @@ namespace DALlab3.Entities
         // Unable to generate entity type for table 'Production.ProductDocument'. Please see the warning messages.
         // Unable to generate entity type for table 'Production.Document'. Please see the warning messages.
 
-        public AdventureWorks2014Context(DbContextOptions<AdventureWorks2014Context> options)
+        public _Context(DbContextOptions<_Context> options)
         : base(options)
         { }
-
+        /*
+        protected override void OnConfiguring(DbContextOptionsBuilder builder)
+        {
+            builder.UseSqlServer("Data Source=DESKTOP-KDKTVJH\\LUCIANSQL;Initial Catalog=AdventureWorks2014;Persist Security Info=True;User ID=sa;Password=335113;");
+            base.OnConfiguring(builder);
+        }
+        */
         //AdventureWorks2014Context' should declare a constructor that accepts a DbContextOptions<AdventureWorks2014Context> 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

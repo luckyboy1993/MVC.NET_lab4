@@ -6,16 +6,18 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DALlab3.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace lab3.ApiControllers
 {
     [Produces("application/json")]
     [Route("api/Products")]
+    [Authorize]
     public class ProductsController : Controller
     {
-        private readonly AdventureWorks2014Context _context;
+        private readonly _Context _context;
 
-        public ProductsController(AdventureWorks2014Context context)
+        public ProductsController(_Context context)
         {
             _context = context;
         }

@@ -13,9 +13,9 @@ namespace lab3.ApiControllers
     [Route("api/SalesPersons")]
     public class SalesPersonsController : Controller
     {
-        private readonly AdventureWorks2014Context _context;
+        private readonly _Context _context;
 
-        public SalesPersonsController(AdventureWorks2014Context context)
+        public SalesPersonsController(_Context context)
         {
             _context = context;
         }

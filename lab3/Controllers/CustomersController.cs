@@ -11,9 +11,9 @@ namespace lab3.Controllers
 {
     public class CustomersController : Controller
     {
-        private readonly AdventureWorks2014Context _context;
+        private readonly _Context _context;
 
-        public CustomersController(AdventureWorks2014Context context)
+        public CustomersController(_Context context)
         {
             _context = context;
         }

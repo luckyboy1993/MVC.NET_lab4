@@ -1,8 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "AjaxStores";
+    ViewData["Title"] = "ApiStores";
 }
 
-<h2>AjaxStores</h2>
+<h2>ApiStores</h2>
 
 <button type="button" onclick="load()">Get Stores</button>
 
@@ -40,7 +40,7 @@
 
     function toTable(data) {
         $('#table').empty();
-        $('#table').append('<tr><th>Name</th><th>Id</th><th>Sales last year</th></tr>');
+        $('#table').append('<tr><th>Name</th><th>Id</th><th>Bonus</th></tr>');
         var i;
         var response = $.parseJSON(data);
         $(function () {
@@ -48,7 +48,7 @@
                 var $tr = $('<tr>').append(
                     $('<td>').text(item.name),
                     $('<td>').text(item.businessEntityId),
-                    $('<td>').text(item.salesPerson.salesLastYear)
+                    $('<td>').text(item.salesPerson.bonus)
                 ).appendTo('#table');
             });
         });

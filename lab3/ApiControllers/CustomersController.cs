@@ -6,25 +6,28 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DALlab3.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace lab3.ApiControllers
 {
     [Produces("application/json")]
-    [Route("api/Customers")]
+    [Route("api/Customers")]   
+    [Authorize]
     public class CustomersController : Controller
     {
-        private readonly AdventureWorks2014Context _context;
+        private readonly _Context _context;
 
-        public CustomersController(AdventureWorks2014Context context)
+        public CustomersController(_Context context)
         {
             _context = context;
         }
 
         // GET: api/Customers
         [HttpGet]
+        [AllowAnonymous]
         public IEnumerable<Customer> GetCustomer()
         {
-            return _context.Customer;
+            return _context.Customer.Include(s => s.Person.PersonPhone).Take(1000);
         }
 
         // GET: api/Customers/5
