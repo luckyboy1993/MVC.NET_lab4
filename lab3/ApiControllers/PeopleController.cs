@@ -12,7 +12,8 @@ namespace lab3.ApiControllers
 {
     [Produces("application/json")]
     [Route("api/People")]
-    //[Authorize]
+    [ApiVersion("1.0"), ApiVersion("1.1")]
+    [Authorize]
     public class PeopleController : Controller
     {
         private readonly _Context _context;
@@ -24,10 +25,10 @@ namespace lab3.ApiControllers
 
         // GET: api/People
         [HttpGet]
-        //[AllowAnonymous]
+        [AllowAnonymous]
         public IEnumerable<Person> GetPerson()
         {
-            return _context.Person;
+            return _context.Person.Take(100);
         }
 
         // GET: api/People/5

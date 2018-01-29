@@ -8,5 +8,9 @@ namespace DALlab3.Entities
     {
         public string FirstName { get; set; }
         public string Phone { get; set; }
+        public string PersonType { get; set; }
+
+        public TokenRequestModel()
+        { }
     }
 }
